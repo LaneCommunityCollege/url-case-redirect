@@ -1,0 +1,14 @@
+<?php
+
+function is_part_uppercase($string) {
+    return strtolower($string) !== $string;
+}
+
+function url_case_redirect_init(){
+    $path = request_path();
+    if((drupal_lookup_path('source', $path) || drupal_lookup_path('source', mb_strtolower($path))) && is_part_uppercase($path)){
+        $options = array('query' => drupal_get_query_parameters());
+        drupal_goto(mb_strtolower($path), $options, 301);
+    }
+}
+?>
