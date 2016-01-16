@@ -1,4 +1,4 @@
 name = URL Case Dedirect
-description = "If any part of a url is uppercase, redirect it to the lowercase version"
+description = "If any part of a url is uppercase, redirect it to the lowercase version. And if the url has a trailing slash, remove it."
 core = 7.x
 version = "7.x-0.x-dev"

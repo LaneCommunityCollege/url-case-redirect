@@ -6,9 +6,13 @@ function is_part_uppercase($string) {
 
 function url_case_redirect_init(){
     $path = request_path();
-    if((drupal_lookup_path('source', $path) || drupal_lookup_path('source', mb_strtolower($path))) && is_part_uppercase($path)){
-        $options = array('query' => drupal_get_query_parameters());
-        drupal_goto(mb_strtolower($path), $options, 301);
+    // If this is a mixed case url, redirect it to just lowercase
+    if((drupal_lookup_path('source', $path) || 
+        drupal_lookup_path('source', mb_strtolower($path))) 
+        && is_part_uppercase($path) 
+        || substr(request_uri(), -1) == '/'){
+            $options = array('query' => drupal_get_query_parameters());
+            drupal_goto(mb_strtolower($path), $options, 301);
     }
 }
 ?>
